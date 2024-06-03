@@ -4,7 +4,7 @@ import "golang.org/x/text/message"
 
 // struct of json error message (404, 503, etc)
 type RestErr struct {
-	Message string   `json:"message"` // [rint the message of request
+	Message string   `json:"message"` // print the message of request
 	Err     string   `json:"error"` // print the error of request
 	Code    int    `json:"code"` // print the code of request
 	Causes  []Causes `json:"causes"` // print the error causes inside of the api
@@ -13,7 +13,7 @@ type RestErr struct {
 // this struct will send the message about the field in use, example bellow
 type Causes struct {
 	Field   string `json:"field"` // the user send a incorrect password, here we will send a message about it
-	Message string `json:"message` // here too ^
+	Message string `json:"message"` // here too ^
 }
 
 // a builder to our object REST error
@@ -53,7 +53,7 @@ func NewBadRequestValidationError(message string, causes []Causes) *RestErr{
 // func returning error 403 - focus on JWT
 func NewForbiddenRequestError(message string) *RestErr{
 	return &RestErr{
-		Message: message
+		Message: message,
 		Err: "forbidden_request",
 		Code: http.StatusForbidden,
 	}
@@ -62,7 +62,7 @@ func NewForbiddenRequestError(message string) *RestErr{
 // func returning error 404
 func NewNotFoundRequestError(message string) *RestErr{
 	return &RestErr{
-		Message: message
+		Message: message,
 		Err: "not_found_request",
 		Code: http.StatusNotFound,
 	}
